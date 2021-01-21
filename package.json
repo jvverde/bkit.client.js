@@ -1,0 +1,40 @@
+{
+  "name": "js.client",
+  "version": "0.0.1",
+  "description": "bKit Client",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jvverde/bkit.client.js.git"
+  },
+  "keywords": [
+    "backup",
+    "recovery",
+    "restore",
+    "data",
+    "bkit",
+    "authentication",
+    "SRP",
+    "remote",
+    "secure",
+    "password"
+  ],
+  "author": "Isidro Vila Verde",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jvverde/bkit.client.js/issues"
+  },
+  "homepage": "https://github.com/jvverde/bkit.client.js#readme",
+  "dependencies": {
+    "@caporal/core": "^2.0.2",
+    "axios": "^0.21.1",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "commander": "^7.0.0",
+    "enquirer": "^2.3.6",
+    "yargs": "^16.2.0"
+  }
+}
