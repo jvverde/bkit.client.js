@@ -7,7 +7,7 @@
     "test": "jest bkit.js"
   },
   "bin": {
-   "bkit": "./bkit.js"
+    "bkit": "./bkit.js"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,8 @@
     "commander": "^7.0.0",
     "dotenv": "^8.2.0",
     "enquirer": "^2.3.6",
+    "shelljs": "^0.8.4",
+    "write-ini-file": "^3.0.2",
     "yargs": "^16.2.0"
   }
 }

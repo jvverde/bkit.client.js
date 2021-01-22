@@ -1,16 +1,13 @@
 const get = require('../../lib/get')
+const config = require('../../lib/config')
+
 exports.command = 'api <url>'
 exports.desc = 'Set api base URL address'
 exports.handler = async ({url}) => {
-  try {
-    const info = await get(`${url}/info`)
-    console.log('api info', info)
-  } catch (err) {
-    console.error('Error:', err)
-    if (err.response) {
-      console.warn('Response status: ', err.response.status, err.response.statusText)
-      console.warn('Response data: ', err.response.data)
-    }
-
-  }
+  const info = await get(`${url}/info`)
+  if (!info) return undefined
+  const conf = config.load()
+  conf.BKITAPI_BASEURL = url
+  // console.log('conf', conf)
+  return config.save(conf)
 }
