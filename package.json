@@ -1,10 +1,13 @@
 {
-  "name": "js.client",
+  "name": "bKit",
   "version": "0.0.1",
-  "description": "bKit Client",
-  "main": "index.js",
+  "description": "A CLI bKit Client",
+  "main": "bkit.js",
   "scripts": {
-    "test": "jest index.js"
+    "test": "jest bkit.js"
+  },
+  "bin": {
+   "bkit": "./bkit.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +37,7 @@
     "clear": "^0.1.0",
     "clui": "^0.3.6",
     "commander": "^7.0.0",
+    "dotenv": "^8.2.0",
     "enquirer": "^2.3.6",
     "yargs": "^16.2.0"
   }
