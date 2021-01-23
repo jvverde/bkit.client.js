@@ -6,7 +6,7 @@ const inquirer = require('inquirer')
 
 const ask = {
   code: (email) => inquirer.prompt({ type: 'input', name:'code', message: `Received code on ${email}:` }),
-  pass: () => inquirer.prompt({ type: 'password', name:'pass', message: 'Password:' })
+  pass: () => inquirer.prompt({ type: 'password', name:'pass', message: 'Password:', mask: '*' })
 }
 exports.command = 'create <username> <email>'
 exports.desc = 'Create a new user'
@@ -31,6 +31,8 @@ exports.handler = async ({ username, email, password }) => {
 
     const confirm = { email, username, salt, encVerifier, proof, username, digest }
     console.log(confirm)
+    const result = await post(`${baseurl}/auth/confirm`, confirm)
+    console.log(result)
   } catch (err) {
     console.error('Error:', err)
   }
