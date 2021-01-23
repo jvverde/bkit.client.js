@@ -32,15 +32,13 @@
   },
   "homepage": "https://github.com/jvverde/bkit.client.js#readme",
   "dependencies": {
-    "@caporal/core": "^2.0.2",
+    "argon2": "^0.27.1",
     "axios": "^0.21.1",
     "clear": "^0.1.0",
     "clui": "^0.3.6",
-    "commander": "^7.0.0",
     "dotenv": "^8.2.0",
-    "enquirer": "^2.3.6",
+    "inquirer": "^7.3.3",
     "shelljs": "^0.8.4",
-    "write-ini-file": "^3.0.2",
     "yargs": "^16.2.0"
   }
 }

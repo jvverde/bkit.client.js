@@ -6,14 +6,10 @@ exports.desc = 'Check if a user exists'
 exports.handler = async ({user}) => {
   try {
     const baseurl = config.load().BKITAPI_BASEURL
-    const result = await get(`${baseurl}/auth/ckeck/${user}`)
-    console.log('Answer', result)
+    if (!/^https?:\/\//.test(baseurl)) throw new Error(`baseurl=${baseurl}`)
+    const result = await get(`${baseurl}/auth/check/${user}`)
+    console.log('Answer:', result)
   } catch (err) {
     console.error('Error:', err)
-    if (err.response) {
-      console.warn('Response status: ', err.response.status, err.response.statusText)
-      console.warn('Response data: ', err.response.data)
-    }
-
   }
 }
