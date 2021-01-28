@@ -3,6 +3,7 @@ const config = require('../../lib/config')
 const { encrypt, decrypt, hmac } = require('../../lib/crypto')
 const stamp = require('../../lib/stamp')
 const inquirer = require('inquirer')
+const chalk = require('chalk')
 
 const ask = {
   code: (email) => inquirer.prompt({ type: 'input', name:'code', message: `Received code on ${email}:` }),
@@ -19,18 +20,19 @@ exports.handler = async ({ username, email, password }) => {
       username,
       email
     })
-    console.log('Answer:', answer)
     const { code } = await ask.code(email)
-    const secret = decrypt(answer.encsec, code)
-    if (hmac(secret, code) !== answer.digest) throw new Error(`Wrong code`)
-
+    let secret
+    try {
+      secret = decrypt(answer.encsec, code)
+    } catch (err) {
+      return console.warn(chalk.red.bgWhite('Wrong code'))
+    }
     const { salt, verifier } = await stamp(username, password)
     const proof = hmac(answer.encsec, code)
     const encVerifier = encrypt(verifier, secret)
     const digest = hmac(verifier, secret)
 
     const confirm = { email, username, salt, encVerifier, proof, username, digest }
-    console.log(confirm)
     const result = await post(`${baseurl}/auth/confirm`, confirm)
     console.log(result)
   } catch (err) {
