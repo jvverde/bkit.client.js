@@ -1,4 +1,4 @@
-const get = require('../lib/get')
+const { get } = require('../lib/rest')
 
 exports.command = 'get <url>'
 exports.desc = 'Get a url'

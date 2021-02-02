@@ -1,4 +1,4 @@
-const post = require('../../lib/post')
+const { post } = require('../../lib/rest')
 const config = require('../../lib/config')
 const stamp = require('../../lib/stamp')
 const { hmac } = require('../../lib/crypto')
@@ -13,20 +13,18 @@ exports.desc = 'Login User'
 exports.handler = async ({ username, password }) => {
   password = password || (await ask.pass()).pass
   try {
-    const conf = config.load()
-    const baseurl = conf.BKITAPI_BASEURL
-    if (!/^https?:\/\//.test(baseurl)) throw new Error(`baseurl=${baseurl}`)
     const { client } = await stamp(username, password)
     const pubkey = client.getPublicKey()
-    const session = await post(`${baseurl}/auth/pubKey`, { username, pubkey })
+    const session = await post('/auth/pubKey', { username, pubkey })
     // console.log(session)
     client.setSalt(session.salt)
     client.setServerPublicKey(session.pubkey)
     const proof = client.getProof()
-    const answer = await post(`${baseurl}/auth/login`, { proof, username, uuid: session.uuid })
+    const answer = await post('/auth/login', { proof, username, uuid: session.uuid })
     const isValid = client.checkServerProof(answer.proof)
     const key = client.getSharedKey()
     const id = hmac(answer.token, key)
+    const conf = config.load()
     conf.TOKEN = `${id}:${answer.token}`
     config.save(conf)
   } catch (err) {
