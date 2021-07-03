@@ -1,4 +1,4 @@
-const get = require('../../lib/get')
+const { get } = require('../../lib/rest')
 const config = require('../../lib/config')
 
 exports.command = 'api <url>'
